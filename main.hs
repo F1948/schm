@@ -1,15 +1,13 @@
 module Main where
 import System.Environment
 
-f :: [String] -> [Int]
+f :: String -> String
 f x = case x of 
-  [] -> [0, 0]
-  (a:[]) -> [(read a), 0]
-  b -> map read b
+  "" -> "John"
+  b  -> b
 
 main :: IO ()
 main = do
-  args <- getArgs
-  let args1 = f args
-  let result = args1 !! 0 + args1 !! 1 
-  putStrLn ("Hello, " ++ show result)
+  name <- getLine
+  let result = f name
+  putStrLn ("Hello, " ++ result)
