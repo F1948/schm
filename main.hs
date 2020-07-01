@@ -3,7 +3,7 @@ import System.Environment
 
 f :: String -> String
 f x = case x of 
-  "" -> "John"
+  "" -> "John Smith"
   b  -> b
 
 main :: IO ()
