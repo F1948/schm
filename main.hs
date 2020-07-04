@@ -10,6 +10,7 @@ data LispVal
   | Number Integer
   | String String
   | Bool Bool
+  deriving Show
 
 symbol :: Parser Char
 symbol = oneOf "!#$%&|*+-/:<=?&@^_~"
@@ -38,7 +39,7 @@ parseNumber :: Parser LispVal
 parseNumber = do
   x <- many1 digit
   return $ Number (read x)
-  
+ 
 parseExpr :: Parser LispVal
 parseExpr = parseAtom
          <|> parseString
@@ -47,7 +48,7 @@ parseExpr = parseAtom
 readExpr :: String -> String
 readExpr input = case parse parseExpr "lisp" input of
     Left err -> "No match: " ++ show err
-    Right val -> "Found value"
+    Right val -> "Found value: " ++ show val
 
 f :: [Char]
 f = do
@@ -58,5 +59,6 @@ f = do
 
 main :: IO ()
 main = do
-    (expr:_) <- getArgs
+    expr <- readLn
+    --(expr:_) <- getArgs
     putStrLn (readExpr expr)
